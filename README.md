@@ -8,13 +8,13 @@ Using giggi you can group git repositories in workspaces and run git commands on
 
 ## How to use it
 
-```
+```bash
 npm install -g giggi
 ```
 
 You can run it with `giggi` or `git gg`:
 
-```
+```bash
 > $ git gg
 Usage: giggi [options] [command]
 
@@ -33,6 +33,6 @@ Commands:
   workspace-set-default|wsd <workspace>                set default workspace
   workspace-remove|wr                                  remove the workspace
   workspace-status|ws [workspace]                      get status of all repos in the workspace
-  worspace-from-dir|wfd <directory> [workspace]        create a workspace from the given directory, all repo in the directory are added to the workspace
+  workspace-from-dir|wfd <directory> [workspace]       create a workspace from the given directory, all repo in the directory are added to the workspace
   workspace-fetch|wf [workspace]                       run fetch on all repos in the workspace
 ```
