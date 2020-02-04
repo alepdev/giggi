@@ -20,7 +20,7 @@ beforeAll(() => {
     global.console.error = jest.fn();
 });
 
-afterEach(() => { 
+afterEach(() => {
     datastore.db = Object.assign({}, defaults);
     global.console.log.mockReset();
     global.console.error.mockReset();
@@ -76,7 +76,7 @@ test('Workspace setDefault', async () => {
     expect(console.log).toHaveBeenCalled();
 });
 
-test('worspace fetch', async () => {
+test('workspace fetch', async () => {
     await workspace.workspaceFromDir({directory: validWorkspace});
     console.log.mockReset();
     workspace.setDefault({workspace: 'validWorkspace'});
