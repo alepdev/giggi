@@ -96,16 +96,16 @@ function update(argv) {
 }
 
 async function getSimpleGit(argv) {
-  let { repo, workspace } = argv;
+  let { repoName, workspace } = argv;
   workspace = workspace || datastore.get("config.defaultWorkspace");
-  let r = datastore.get(`workspaces.${workspace}.repos.${repo}`, {});
+  let r = datastore.get(`workspaces.${workspace}.repos.${repoName}`, {});
 
   if (r.path && utils.dirExist(r.path)) {
     try {
       return await simpleGit(r.path);
     } catch (err) {
       console.error(
-        `Something went wrong initializing SimpleGit for ${repo} (${r.path})`
+        `Something went wrong initializing SimpleGit for ${repoName} (${r.path})`
       );
       console.error(err);
     }
@@ -113,12 +113,12 @@ async function getSimpleGit(argv) {
 }
 
 async function getStatus(argv) {
-  let { repo, workspace } = argv;
+  let { repoName, workspace } = argv;
   workspace = workspace || datastore.get("config.defaultWorkspace");
-  let r = datastore.get(`workspaces.${workspace}.repos.${repo}`, {});
+  let r = datastore.get(`workspaces.${workspace}.repos.${repoName}`, {});
 
   try {
-    let git = await getSimpleGit({ repo, workspace });
+    let git = await getSimpleGit({ repoName, workspace });
     let status = await git.status();
     let branches = await git.branch();
     let trackingString = utils.formatTrackingString(
@@ -136,16 +136,16 @@ async function getStatus(argv) {
     } <=> ${trackingString}`;
   } catch (err) {
     console.error(
-      `Something went wrong trying to read the status of ${repo} (${r.path})`
+      `Something went wrong trying to read the status of ${repoName} (${r.path})`
     );
     return "";
   }
 }
 
 async function fetch(argv) {
-  let { repo, workspace } = argv;
+  let { repoName, workspace } = argv;
   workspace = workspace || datastore.get("config.defaultWorkspace");
-  let r = datastore.get(`workspaces.${workspace}.repos.${repo}`, {});
+  let r = datastore.get(`workspaces.${workspace}.repos.${repoName}`, {});
   console.log(`\nfetching: ${chalk.green(r.path)}`);
   process.chdir(r.path);
   let git = child_process.spawnSync("git", ["fetch"], { stdio: "inherit" });

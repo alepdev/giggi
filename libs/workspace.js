@@ -86,7 +86,7 @@ async function fetch(argv) {
   argv = argv || {};
   let workspace = argv.workspace;
   await forEachRepo(workspace, async (repoName, workspace) => {
-    await repo.fetch({ repo: repoName, workspace });
+    await repo.fetch({ repoName, workspace });
   });
 }
 
